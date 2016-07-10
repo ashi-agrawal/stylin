@@ -24,6 +24,7 @@ public class DrawOverlayView extends View {
     private Paint drawPaint;
     private Paint paint;
     public Bitmap bitmap;
+    private Bitmap bmp;
     Point[] points = new Point[4];
 
     /**
@@ -45,13 +46,22 @@ public class DrawOverlayView extends View {
         rectPoints = new ArrayList<Point>();
     }
 
-    public void updateBitmap() {
-        for (int x = colorballs.get(0).getX(); x <= colorballs.get(3).getX(); x++) {
-            for (int y = colorballs.get(0).getY(); y <= colorballs.get(2).getY(); y++) {
-                bitmap.setPixel(x, y, Color.BLUE);
-            }
-        }
-    }
+//    public void updateBitmap() {
+//        int w = colorballs.get(3).getX() - colorballs.get(0).getX() + 1;
+//        int h = colorballs.get(1).getY() - colorballs.get(0).getY() + 1;
+//        int background = bitmap.getPixel(colorballs.get(0).getX() - 15, colorballs.get(0).getY() - 15);
+//
+//        Bitmap.Config conf = Bitmap.Config.ARGB_8888; // see other conf types
+//        bmp = Bitmap.createBitmap(w, h, conf); // this creates a MUTABLE bitmap
+//        Canvas canvas = new Canvas(bmp);
+//        for (int x = colorballs.get(0).getX() + 95; x <= colorballs.get(3).getX() + 95; x++) {
+//            for (int y = colorballs.get(0).getY() + 95; y <= colorballs.get(2).getY() + 95; y++) {
+//                bmp.setPixel(x - (colorballs.get(0).getX() + 95), y - (colorballs.get(0).getY() + 95), bitmap.getPixel(x, y));
+//                bitmap.setPixel(x, y, background);
+//            }
+//        }
+//        postInvalidate();
+//    }
 
     public DrawOverlayView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
@@ -60,6 +70,9 @@ public class DrawOverlayView extends View {
     @Override
     protected void onDraw(Canvas canvas){
         canvas.drawBitmap(bitmap, 0, 0, null);
+        if (bmp != null) {
+            canvas.drawBitmap(bmp, 0, 0, null);
+        }
         if(points[3]==null) //point4 null when user did not touch and move on screen.
             return;
         int left, top, right, bottom;
@@ -114,8 +127,13 @@ public class DrawOverlayView extends View {
     }
 
     public void addBitmap(Bitmap bitmap){
-        this.bitmap = bitmap;
+        Bitmap mutableBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true);
+        this.bitmap = mutableBitmap;
         postInvalidate();
+    }
+
+    public void updateBalls(){
+
     }
 
     @Override
