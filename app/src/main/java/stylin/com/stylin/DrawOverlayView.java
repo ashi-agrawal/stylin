@@ -1,5 +1,6 @@
 package stylin.com.stylin;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,6 +13,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 
 import java.util.ArrayList;
@@ -21,14 +23,14 @@ public class DrawOverlayView extends View {
     private List<Point> rectPoints;
     private Paint drawPaint;
     private Paint paint;
-    private Bitmap bitmap;
+    public Bitmap bitmap;
     Point[] points = new Point[4];
 
     /**
      * point1 and point 3 are of same group and same as point 2 and point4
      */
     int groupId = -1;
-    private ArrayList<ColorBall> colorballs = new ArrayList<ColorBall>();
+    public ArrayList<ColorBall> colorballs = new ArrayList<ColorBall>();
     // array that holds the balls
     private int balID = 0;
     // variable to know what ball is being dragged
@@ -41,17 +43,14 @@ public class DrawOverlayView extends View {
         setFocusable(true); // necessary for getting the touch events
         canvas = new Canvas();
         rectPoints = new ArrayList<Point>();
-        doneSelectButton = (Button) findViewById(R.id.doneSelectButton);
-        doneSelectButton.setOnClickListener(new OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                for (int x = colorballs.get(0).getX(); x <= colorballs.get(3).getX(); x++) {
-                    for (int y = colorballs.get(0).getY(); y <= colorballs.get(2).getY(); y++) {
-                        bitmap.setPixel(x, y, Color.BLUE);
-                    }
-                }
+    }
+
+    public void updateBitmap() {
+        for (int x = colorballs.get(0).getX(); x <= colorballs.get(3).getX(); x++) {
+            for (int y = colorballs.get(0).getY(); y <= colorballs.get(2).getY(); y++) {
+                bitmap.setPixel(x, y, Color.BLUE);
             }
-        });
+        }
     }
 
     public DrawOverlayView(Context context, AttributeSet attrs, int defStyle) {
@@ -228,53 +227,6 @@ public class DrawOverlayView extends View {
         return true;
     }
 
-    public static class ColorBall {
 
-        Bitmap bitmap;
-        Context mContext;
-        Point point;
-        int id;
-        static int count = 0;
-
-        public ColorBall(Context context, int resourceId, Point point) {
-            this.id = count++;
-            bitmap = BitmapFactory.decodeResource(context.getResources(),
-                    resourceId);
-            mContext = context;
-            this.point = point;
-        }
-
-        public int getWidthOfBall() {
-            return bitmap.getWidth();
-        }
-
-        public int getHeightOfBall() {
-            return bitmap.getHeight();
-        }
-
-        public Bitmap getBitmap() {
-            return bitmap;
-        }
-
-        public int getX() {
-            return point.x;
-        }
-
-        public int getY() {
-            return point.y;
-        }
-
-        public int getID() {
-            return id;
-        }
-
-        public void setX(int x) {
-            point.x = x;
-        }
-
-        public void setY(int y) {
-            point.y = y;
-        }
-    }
 
 }

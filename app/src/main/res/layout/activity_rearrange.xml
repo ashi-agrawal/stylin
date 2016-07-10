@@ -15,10 +15,10 @@
         android:id="@+id/dovRect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true" >
+    </stylin.com.stylin.DrawOverlayView>
 
     <Button
         android:text="Done Selecting"
@@ -27,7 +27,6 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
         android:layout_marginLeft="117dp"
         android:layout_marginStart="117dp"
         android:layout_marginTop="447dp"
