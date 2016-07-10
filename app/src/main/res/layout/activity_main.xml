@@ -22,7 +22,7 @@ tools:context="stylin.com.stylin.MainActivity">
     android:visibility="invisible"
     android:onClick="onRearrangeView"
     android:layout_below="@+id/launchCameraButton"
-    android:layout_alignLeft="@+id/launchCameraButton"
+    android:layout_gravity="center_horizontal"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content" />
 
