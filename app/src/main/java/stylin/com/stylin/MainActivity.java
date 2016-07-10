@@ -19,6 +19,7 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
         import java.io.IOException;
 
@@ -134,7 +135,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void onRearrangeView(View view) {
         Intent intent = new Intent(this, Rearrange.class);
-        intent.putExtra(IMAGE_FILE, m_image);
+        ByteArrayOutputStream _bs = new ByteArrayOutputStream();
+        m_image.compress(Bitmap.CompressFormat.PNG, 100, _bs);
+        intent.putExtra(IMAGE_FILE, _bs.toByteArray());
         startActivity(intent);
     }
 }
