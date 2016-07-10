@@ -15,7 +15,11 @@ import android.content.Intent;
         import android.widget.ImageView;
         import android.widget.Toast;
 
-        import java.io.File;
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
+
+import java.io.File;
         import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,12 +27,22 @@ public class MainActivity extends AppCompatActivity {
     public final String APP_TAG = "MyCustomApp";
     public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
     public String photoFileName = "photo.jpg";
+    public static final String IMAGE_FILE = "stylin.com.stylin.IMAGE_FILE";
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
+    private Bitmap m_image = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     public void onLaunchCamera(View view) {
@@ -55,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
                 // Load the taken image into a preview
                 ImageView ivPreview = (ImageView) findViewById(R.id.ivPreview);
                 ivPreview.setImageBitmap(bMapScaled);
+
+                m_image = bMapScaled;
             } else { // Result was a failure
                 Toast.makeText(this, "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
             }
@@ -72,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                     getExternalFilesDir(Environment.DIRECTORY_PICTURES), APP_TAG);
 
             // Create the storage directory if it does not exist
-            if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()){
+            if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()) {
                 Log.d(APP_TAG, "failed to create directory");
             }
 
@@ -116,5 +132,10 @@ public class MainActivity extends AppCompatActivity {
         return rotatedBitmap;
     }
 
+    public void onRearrangeView(View view) {
+        Intent intent = new Intent(this, Rearrange.class);
+        intent.putExtra(IMAGE_FILE, m_image);
+        startActivity(intent);
+    }
 }
 

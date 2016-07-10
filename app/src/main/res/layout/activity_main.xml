@@ -22,5 +22,11 @@ tools:context="stylin.com.stylin.MainActivity">
     android:layout_alignParentBottom="true"
     android:onClick="onLaunchCamera"/>
 
+    <Button android:id="@+id/rearrangeViewButton"
+        android:text="Go to another view!"
+        android:onClick="onRearrangeView"
+        android:layout_width="88dp"
+        android:layout_height="48dp" />
+
 </RelativeLayout>
 
