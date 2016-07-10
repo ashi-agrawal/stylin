@@ -20,15 +20,18 @@ public class Rearrange extends AppCompatActivity {
 
         Intent intent = getIntent();
         if (intent.hasExtra(MainActivity.IMAGE_FILE)) {
-            ImageView _imv = new ImageView(this);
-            Bitmap _bitmap = BitmapFactory.decodeByteArray(
+
+//            ImageView _imv = new ImageView(this);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(
                     intent.getByteArrayExtra(MainActivity.IMAGE_FILE),
                     0,
                     intent.getByteArrayExtra(MainActivity.IMAGE_FILE).length
             );
-            _imv.setImageBitmap(_bitmap);
-            RelativeLayout rl = (RelativeLayout) findViewById(R.id.base);
-            rl.addView(_imv);
+//            _imv.setImageBitmap(_bitmap);
+            DrawOverlayView dovRect = (DrawOverlayView) findViewById(R.id.dovRect);
+            dovRect.addBitmap(bitmap);
+//            RelativeLayout rl = (RelativeLayout) findViewById(R.id.base);
+//            rl.addView(_imv);
         }
     }
 }

@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
     public void onRearrangeView(View view) {
         Intent intent = new Intent(this, Rearrange.class);
         ByteArrayOutputStream _bs = new ByteArrayOutputStream();
-        m_image.compress(Bitmap.CompressFormat.PNG, 100, _bs);
+        m_image.compress(Bitmap.CompressFormat.JPEG, 50, _bs);
         intent.putExtra(IMAGE_FILE, _bs.toByteArray());
         startActivity(intent);
     }
