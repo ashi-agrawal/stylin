@@ -12,7 +12,8 @@ import android.content.Intent;
         import android.os.Bundle;
         import android.util.Log;
         import android.view.View;
-        import android.widget.ImageView;
+import android.widget.Button;
+import android.widget.ImageView;
         import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onLaunchCamera(View view) {
         Button rearrangeBtn = (Button) findViewById(R.id.rearrangeViewButton);
-	rearrangeBtn.setVisibility(0);
+	    rearrangeBtn.setVisibility(View.VISIBLE);
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, getPhotoFileUri(photoFileName));
         if (intent.resolveActivity(getPackageManager()) != null) {
@@ -63,9 +64,6 @@ public class MainActivity extends AppCompatActivity {
                 Bitmap takenImage = BitmapFactory.decodeFile(takenPhotoUri.getPath());
                 Bitmap bMapScaled = Bitmap.createScaledBitmap(takenImage, 1500, 1000, true);
                 // Load the taken image into a preview
-                ImageView ivPreview = (ImageView) findViewById(R.id.ivPreview);
-                ivPreview.setImageBitmap(bMapScaled);
-
                 m_image = bMapScaled;
             } else { // Result was a failure
                 Toast.makeText(this, "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
