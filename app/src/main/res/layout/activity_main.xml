@@ -7,26 +7,23 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 tools:context="stylin.com.stylin.MainActivity">
 
-<ImageView
-    android:layout_width="32dp"
-    android:layout_height="32dp"
-    android:id="@+id/ivPreview"
-    tools:layout_editor_absoluteY="149dp" />
-
 <Button
     android:text="Camera"
-    android:layout_width="88dp"
-    android:layout_height="48dp"
-    tools:layout_editor_absoluteY="416dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:id="@+id/launchCameraButton"
-    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:layout_alignParentTop="true"
+    android:layout_marginTop="144dp"
     android:onClick="onLaunchCamera"/>
 
-    <Button android:id="@+id/rearrangeViewButton"
-        android:text="Go to another view!"
-        android:onClick="onRearrangeView"
-        android:layout_width="88dp"
-        android:layout_height="48dp" />
+<Button android:id="@+id/rearrangeViewButton"
+    android:text="Rearrange items!"
+    android:visibility="invisible"
+    android:onClick="onRearrangeView"
+    android:layout_below="@+id/launchCameraButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
 
 </RelativeLayout>
 
